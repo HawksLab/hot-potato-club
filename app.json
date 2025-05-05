@@ -1,11 +1,11 @@
 {
   "expo": {
-    "name": "boomb-party",
-    "slug": "boomb-party",
+    "name": " ",
+    "slug": "hot-potato-club",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/images/icon.png",
-    "scheme": "boombparty",
+    "icon": "./app/assets/images/logo.png",
+    "scheme": "hot-potato-club",
     "userInterfaceStyle": "automatic",
     "newArchEnabled": true,
     "ios": {
@@ -13,7 +13,7 @@
     },
     "android": {
       "adaptiveIcon": {
-        "foregroundImage": "./assets/images/adaptive-icon.png",
+        "foregroundImage": "./app/assets/images/logo.png",
         "backgroundColor": "#ffffff"
       },
       "edgeToEdgeEnabled": true
@@ -21,20 +21,16 @@
     "web": {
       "bundler": "metro",
       "output": "static",
-      "favicon": "./assets/images/favicon.png"
+      "favicon": "./app/assets/images/logo.png"
     },
     "plugins": [
-      "expo-router",
-      [
-        "expo-splash-screen",
-        {
-          "image": "./assets/images/splash-icon.png",
-          "imageWidth": 200,
-          "resizeMode": "contain",
-          "backgroundColor": "#ffffff"
-        }
-      ]
+      "expo-router"
     ],
+    "splash": {
+      "backgroundColor": "#ffffff",
+      "image": "./app/assets/images/logo.png",
+      "resizeMode": "contain"
+    },
     "experiments": {
       "typedRoutes": true
     }

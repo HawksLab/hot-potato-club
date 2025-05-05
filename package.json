@@ -1,10 +1,9 @@
 {
-  "name": "boomb-party",
+  "name": "hot-potato-club",
   "main": "expo-router/entry",
   "version": "1.0.0",
   "scripts": {
     "start": "expo start",
-    "reset-project": "node ./scripts/reset-project.js",
     "android": "expo start --android",
     "ios": "expo start --ios",
     "web": "expo start --web",
@@ -23,7 +22,7 @@
     "expo-image": "~2.1.6",
     "expo-linking": "~7.1.4",
     "expo-router": "~5.0.5",
-    "expo-splash-screen": "~0.30.8",
+    "expo-splash-screen": "^0.30.8",
     "expo-status-bar": "~2.2.3",
     "expo-symbols": "~0.4.4",
     "expo-system-ui": "~5.0.7",
@@ -41,9 +40,9 @@
   "devDependencies": {
     "@babel/core": "^7.25.2",
     "@types/react": "~19.0.10",
-    "typescript": "~5.8.3",
     "eslint": "^9.25.0",
-    "eslint-config-expo": "~9.2.0"
+    "eslint-config-expo": "~9.2.0",
+    "typescript": "~5.8.3"
   },
   "private": true
 }
