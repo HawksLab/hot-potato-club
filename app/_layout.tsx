@@ -1,3 +1,4 @@
+import { GameProvider } from '@/_context/GameContext';
 import * as Font from 'expo-font';
 import { Stack } from 'expo-router';
 import * as SplashScreen from 'expo-splash-screen';
@@ -46,16 +47,18 @@ export default function RootLayout() {
 
   // If we're ready to show the app, render it with our custom splash screen animation
   return (
-    <View 
-      style={{ flex: 1 }}
-      onLayout={onLayoutRootView}
-    >
-      <Stack
-        screenOptions={{
-          headerShown: false,
-          animation: 'fade',
-        }}
-      />
-    </View>
+    <GameProvider>
+      <View 
+        style={{ flex: 1 }}
+        onLayout={onLayoutRootView}
+      >
+        <Stack
+          screenOptions={{
+            headerShown: false,
+            animation: 'fade',
+          }}
+        />
+      </View>
+    </GameProvider>
   );
 }

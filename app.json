@@ -13,10 +13,8 @@
     },
     "android": {
       "adaptiveIcon": {
-        "foregroundImage": "./app/assets/images/logo.png",
-        "backgroundColor": "#ffffff"
-      },
-      "edgeToEdgeEnabled": true
+        "foregroundImage": "./app/assets/images/logo.png"
+      }
     },
     "web": {
       "bundler": "metro",
@@ -27,7 +25,6 @@
       "expo-router"
     ],
     "splash": {
-      "backgroundColor": "#ffffff",
       "image": "./app/assets/images/logo.png",
       "resizeMode": "contain"
     },
