@@ -1,5 +1,5 @@
 import { useGame } from '@/_context/GameContext';
-import { FontAwesome5, MaterialIcons } from '@expo/vector-icons';
+import { MaterialIcons } from '@expo/vector-icons';
 import * as Haptics from 'expo-haptics';
 import { router } from 'expo-router';
 import { StatusBar } from 'expo-status-bar';
@@ -18,7 +18,6 @@ import { useSafeAreaInsets } from 'react-native-safe-area-context';
 export default function Gameplay() {
   const { 
     gameState, 
-    nextPlayer, 
     skipQuestion, 
     explode,
     resetGame
@@ -162,22 +161,17 @@ export default function Gameplay() {
     try {
       Alert.alert(
         'BOOM!',
-        `The bomb exploded with ${gameState.settings.players[gameState.currentPlayer].name}!`,
-        [{ text: 'Continue', onPress: () => {
+        'The bomb exploded! Time to select who was holding it.',
+        [{ text: 'Select Player', onPress: () => {
           setTimeElapsed(0);
           setExplosionTime(null);
-          router.push('/screens/round-result');
+          router.push('/screens/select-loser');
         }}]
       );
     } catch (error) {
       console.error('Error showing alert:', error);
     }
-  }, [explode, gameState.settings.players, gameState.currentPlayer]);
-
-  const handleNextPlayer = () => {
-    Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Medium);
-    nextPlayer();
-  };
+  }, [explode]);
 
   const handleSkipQuestion = () => {
     Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Medium);
@@ -206,8 +200,8 @@ export default function Gameplay() {
     );
   };
 
-  // Get current player name
-  const currentPlayer = gameState.settings.players[gameState.currentPlayer];
+  // Get current player name - now just for display, not for actual game logic
+  const currentPlayer = gameState.settings.players[gameState.currentPlayer] || gameState.settings.players[0];
   
   // Safety check
   if (!currentPlayer) {
@@ -226,7 +220,7 @@ export default function Gameplay() {
         <View style={[styles.countdownOverlay, { paddingTop: insets.top }]}>
           <View style={styles.countdownContent}>
             <Text style={styles.getReadyText}>
-              Get Ready {currentPlayer.name}!
+              Get Ready!
             </Text>
             <Animated.Text
               style={[
@@ -240,7 +234,7 @@ export default function Gameplay() {
               {countdownValue}
             </Animated.Text>
             <Text style={styles.startingPlayerText}>
-              You&apos;re starting Round {gameState.currentRound}
+              Round {gameState.currentRound} is starting...
             </Text>
           </View>
         </View>
@@ -269,9 +263,12 @@ export default function Gameplay() {
           </View>
           
           <View style={styles.gameplayInfo}>
-            <Text style={styles.playerName}>{`${currentPlayer.name}'s turn`}</Text>
+            <Text style={styles.currentRoundText}>Round {gameState.currentRound}</Text>
             <Text style={styles.categoryText}>{gameState.currentCategory}</Text>
             <Text style={styles.questionText}>{gameState.currentQuestion}</Text>
+            <Text style={styles.instructionText}>
+              Discuss the question with your group. When the bomb explodes, select who was holding it!
+            </Text>
           </View>
           
           <View style={styles.footer}>
@@ -280,15 +277,7 @@ export default function Gameplay() {
               onPress={handleSkipQuestion}
             >
               <MaterialIcons name="skip-next" size={24} color="#FE6244" />
-              <Text style={styles.skipButtonText}>Skip</Text>
-            </TouchableOpacity>
-            
-            <TouchableOpacity 
-              style={styles.passButton}
-              onPress={handleNextPlayer}
-            >
-              <FontAwesome5 name="hand-holding" size={24} color="white" />
-              <Text style={styles.passButtonText}>Pass</Text>
+              <Text style={styles.skipButtonText}>Skip Question</Text>
             </TouchableOpacity>
           </View>
         </>
@@ -376,8 +365,8 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     marginVertical: 20,
   },
-  playerName: {
-    fontSize: 28,
+  currentRoundText: {
+    fontSize: 24,
     fontWeight: 'bold',
     color: '#FE6244',
     marginBottom: 10,
@@ -393,12 +382,20 @@ const styles = StyleSheet.create({
     fontSize: 24,
     textAlign: 'center',
     marginHorizontal: 20,
+    marginBottom: 30,
     lineHeight: 34,
     fontFamily: 'SpaceMono',
   },
+  instructionText: {
+    fontSize: 16,
+    textAlign: 'center',
+    marginHorizontal: 20,
+    color: '#666',
+    fontStyle: 'italic',
+    fontFamily: 'SpaceMono',
+  },
   footer: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
+    alignItems: 'center',
     paddingVertical: 20,
   },
   skipButton: {
@@ -413,20 +410,6 @@ const styles = StyleSheet.create({
   },
   skipButtonText: {
     color: '#FE6244',
-    fontSize: 16,
-    marginLeft: 8,
-    fontFamily: 'SpaceMono',
-  },
-  passButton: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    backgroundColor: '#FE6244',
-    paddingVertical: 12,
-    paddingHorizontal: 24,
-    borderRadius: 30,
-  },
-  passButtonText: {
-    color: 'white',
     fontSize: 16,
     marginLeft: 8,
     fontFamily: 'SpaceMono',

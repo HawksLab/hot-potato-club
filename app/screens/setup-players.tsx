@@ -1,20 +1,19 @@
 import { useGame } from '@/_context/GameContext';
-import { Player } from '@/_types/GameTypes';
 import { AntDesign, MaterialIcons } from '@expo/vector-icons';
 import * as Haptics from 'expo-haptics';
 import { router } from 'expo-router';
 import { StatusBar } from 'expo-status-bar';
 import React, { useState } from 'react';
 import {
- Alert,
- KeyboardAvoidingView,
- Platform,
- ScrollView,
- StyleSheet,
- Text,
- TextInput,
- TouchableOpacity,
- View
+    Alert,
+    KeyboardAvoidingView,
+    Platform,
+    ScrollView,
+    StyleSheet,
+    Text,
+    TextInput,
+    TouchableOpacity,
+    View
 } from 'react-native';
 
 export default function SetupPlayers() {
@@ -45,28 +44,27 @@ export default function SetupPlayers() {
   };
   
   const handleNext = () => {
-    // Validate player names
-    const emptyNameIndex = playerNames.findIndex(name => !name.trim());
-    if (emptyNameIndex !== -1) {
-      Alert.alert('Missing Name', `Please enter a name for Player ${emptyNameIndex + 1}`);
+    if (playerNames.length < 2) {
+      Alert.alert('Not enough players', 'You need at least 2 players to start a game.');
       return;
     }
-    
-    // Check for duplicate names
-    const uniqueNames = new Set(playerNames.map(name => name.trim()));
-    if (uniqueNames.size !== playerNames.length) {
-      Alert.alert('Duplicate Names', 'All players must have unique names!');
-      return;
-    }
-    
-    // Create player objects with IDs and save to context
-    const players: Player[] = playerNames.map((name, index) => ({
-      id: `player-${index + 1}`,
-      name: name.trim(),
+
+    // Colors for players
+    const playerColors = [
+      '#FF6B6B', '#4ECDC4', '#45B7D1', '#96CEB4', 
+      '#FFEAA7', '#DDA0DD', '#98D8C8', '#F7DC6F'
+    ];
+
+    // Create player objects with all required properties
+    const playersWithDetails = playerNames.map((name, index) => ({
+      id: `player-${index}`,
+      name,
+      color: playerColors[index % playerColors.length],
+      roundsLost: 0
     }));
-    
-    setPlayers(players);
+
     Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Medium);
+    setPlayers(playersWithDetails);
     router.push('/screens/select-categories');
   };
 

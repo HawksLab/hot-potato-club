@@ -56,6 +56,25 @@ export function gameReducer(state: GameState = initialGameState, action: GameAct
         ...state,
         exploded: true,
         timerRunning: false,
+      };
+    }
+    case 'SET_ROUND_LOSER': {
+      const updatedPlayers = [...state.settings.players];
+      updatedPlayers[action.payload] = {
+        ...updatedPlayers[action.payload],
+        roundsLost: (updatedPlayers[action.payload].roundsLost || 0) + 1
+      };
+      
+      const playerId = state.settings.players[action.payload].id;
+      
+      return {
+        ...state,
+        settings: {
+          ...state.settings,
+          players: updatedPlayers
+        },
+        exploded: true,
+        timerRunning: false,
         roundResults: [...state.roundResults, { playerId, exploded: true }],
       };
     }
