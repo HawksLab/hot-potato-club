@@ -1,14 +1,39 @@
 import * as Haptics from 'expo-haptics';
+import * as Linking from 'expo-linking';
 import { router } from 'expo-router';
 import { StatusBar } from 'expo-status-bar';
 import React from 'react';
-import { Image, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import { Alert, Image, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import Animated, { FadeIn } from 'react-native-reanimated';
 
 export default function Home() {
-  const navigateTo = (path: "/screens/setup-players" | "/screens/how-to-play") => {
+  const navigateTo = (path: "/screens/setup-players" | "/screens/how-to-play" | "/screens/feedback") => {
     Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Medium);
     router.push(path);
+  };
+
+  const handleDonate = async () => {
+    Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Medium);
+    
+    const donateUrl = 'https://www.hawkslab.online/donate';
+    
+    try {
+      const supported = await Linking.canOpenURL(donateUrl);
+      if (supported) {
+        await Linking.openURL(donateUrl);
+      } else {
+        Alert.alert(
+          'Unable to Open',
+          'Sorry, we couldn\'t open the donation page. Please visit your-donation-website.com directly in your browser.'
+        );
+      }
+    } catch (error) {
+      console.error('Error opening donation URL:', error);
+      Alert.alert(
+        'Error',
+        'Something went wrong. Please visit your-donation-website.com directly in your browser.'
+      );
+    }
   };
 
   return (
@@ -45,6 +70,22 @@ export default function Home() {
         >
           <Text style={[styles.buttonText, styles.secondaryButtonText]}>How to Play</Text>
         </TouchableOpacity>
+
+        <View style={styles.bottomButtonsContainer}>
+          <TouchableOpacity 
+            style={[styles.smallButton, styles.feedbackButton]} 
+            onPress={() => navigateTo('/screens/feedback')}
+          >
+            <Text style={styles.smallButtonText}>💬 Feedback</Text>
+          </TouchableOpacity>
+          
+          <TouchableOpacity 
+            style={[styles.smallButton, styles.donateButton]} 
+            onPress={handleDonate}
+          >
+            <Text style={styles.smallButtonText}>❤️ Donate</Text>
+          </TouchableOpacity>
+        </View>
       </Animated.View>
     </View>
   );
@@ -109,5 +150,35 @@ const styles = StyleSheet.create({
   },
   secondaryButtonText: {
     color: '#FE6244',
+  },
+  bottomButtonsContainer: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    marginTop: 20,
+  },
+  smallButton: {
+    backgroundColor: '#F0F0F0',
+    paddingVertical: 12,
+    paddingHorizontal: 20,
+    borderRadius: 20,
+    flex: 0.48,
+    alignItems: 'center',
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 1 },
+    shadowOpacity: 0.1,
+    shadowRadius: 2,
+    elevation: 2,
+  },
+  feedbackButton: {
+    backgroundColor: '#E8F5E8',
+  },
+  donateButton: {
+    backgroundColor: '#FFE8E8',
+  },
+  smallButtonText: {
+    color: '#666',
+    fontSize: 14,
+    fontFamily: 'SpaceMono',
+    fontWeight: 'bold',
   },
 });
