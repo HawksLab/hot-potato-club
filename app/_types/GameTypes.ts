@@ -1,29 +1,31 @@
 // Define data models and state types for the Hot Potato game
-export type Category = {
+export interface Category {
   id: string;
   name: string;
   questions: string[];
-};
+}
 
-export type Player = {
+export interface Player {
   id: string;
   name: string;
-};
+  color: string;
+  roundsLost: number;
+}
 
-export type GameSettings = {
+export interface GameSettings {
   players: Player[];
   selectedCategories: string[];
   rounds: number;
   minTimer: number;
   maxTimer: number;
-};
+}
 
-export type RoundResult = {
+export interface RoundResult {
   playerId: string;
   exploded: boolean;
-};
+}
 
-export type GameState = {
+export interface GameState {
   settings: GameSettings;
   currentRound: number;
   currentQuestion: string;
@@ -33,7 +35,7 @@ export type GameState = {
   exploded: boolean;
   gameOver: boolean;
   roundResults: RoundResult[];
-};
+}
 
 // Action types for reducer
 export type GameAction =
@@ -47,6 +49,7 @@ export type GameAction =
   | { type: 'SKIP_QUESTION' }
   | { type: 'EXPLODE' }
   | { type: 'NEXT_ROUND' }
-  | { type: 'RESET_GAME' };
+  | { type: 'RESET_GAME' }
+  | { type: 'SET_ROUND_LOSER'; payload: number };
 
 export default {} as any;

@@ -17,6 +17,7 @@ type GameContextType = {
   nextRound: () => void;
   resetGame: () => void;
   isGameSetupComplete: () => boolean;
+  setRoundLoser: (playerIndex: number) => void;
 };
 
 export const GameContext = createContext<GameContextType | undefined>(undefined);
@@ -34,6 +35,9 @@ export const GameProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
   const explode = () => dispatch({ type: 'EXPLODE' });
   const nextRound = () => dispatch({ type: 'NEXT_ROUND' });
   const resetGame = () => dispatch({ type: 'RESET_GAME' });
+  const setRoundLoser = (playerIndex: number) => {
+    dispatch({ type: 'SET_ROUND_LOSER', payload: playerIndex });
+  };
 
   const value = useMemo(() => {
     const isGameSetupComplete = () => {
@@ -55,6 +59,7 @@ export const GameProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
       nextRound,
       resetGame,
       isGameSetupComplete,
+      setRoundLoser,
     };
   }, [state]);
 
