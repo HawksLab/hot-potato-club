@@ -24,14 +24,14 @@ export default function Home() {
       } else {
         Alert.alert(
           'Unable to Open',
-          'Sorry, we couldn\'t open the donation page. Please visit your-donation-website.com directly in your browser.'
+          'Sorry, we couldn\'t open the donation page. Please visit https://www.hawkslab.online/donate directly in your browser.'
         );
       }
     } catch (error) {
       console.error('Error opening donation URL:', error);
       Alert.alert(
         'Error',
-        'Something went wrong. Please visit your-donation-website.com directly in your browser.'
+        'Something went wrong. Please visit https://www.hawkslab.online/donate directly in your browser.'
       );
     }
   };
