@@ -1,39 +1,46 @@
 {
-	"expo": {
-		"name": "hot-potato-club",
-		"slug": "hot-potato-club",
-		"version": "1.0.0",
-		"orientation": "portrait",
-		"icon": "./app/assets/images/icon.png",
-		"scheme": "hotpotatoclub",
-		"userInterfaceStyle": "automatic",
-		"newArchEnabled": true,
-		"ios": {
-			"supportsTablet": true
-		},
-		"android": {
-			"adaptiveIcon": {
-				"foregroundImage": "./app/assets/images/logo.png"
-			},
-			"edgeToEdgeEnabled": true
-		},
-		"web": {
-			"bundler": "metro",
-			"output": "static",
-			"favicon": "./app/assets/images/logo.png"
-		},
-		"plugins": [
-			"expo-router",
-			[
-				"expo-splash-screen",
-				{
-					"image": "./app/assets/images/logo.png",
-					"resizeMode": "contain"
-				}
-			]
-		],
-		"experiments": {
-			"typedRoutes": true
-		}
-	}
+  "expo": {
+    "name": "hot-potato-club",
+    "slug": "hot-potato-club",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "icon": "./app/assets/images/icon.png",
+    "scheme": "hotpotatoclub",
+    "userInterfaceStyle": "automatic",
+    "newArchEnabled": true,
+    "ios": {
+      "supportsTablet": true
+    },
+    "android": {
+      "adaptiveIcon": {
+        "foregroundImage": "./app/assets/images/logo.png"
+      },
+      "edgeToEdgeEnabled": true,
+      "package": "com.abhinavgpt.hotpotatoclub"
+    },
+    "web": {
+      "bundler": "metro",
+      "output": "static",
+      "favicon": "./app/assets/images/logo.png"
+    },
+    "plugins": [
+      "expo-router",
+      [
+        "expo-splash-screen",
+        {
+          "image": "./app/assets/images/logo.png",
+          "resizeMode": "contain"
+        }
+      ]
+    ],
+    "experiments": {
+      "typedRoutes": true
+    },
+    "extra": {
+      "router": {},
+      "eas": {
+        "projectId": "95bc3116-3aef-4987-8e96-cec026129713"
+      }
+    }
+  }
 }
