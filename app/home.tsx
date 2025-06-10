@@ -38,7 +38,7 @@ export default function Home() {
 
   return (
     <View style={styles.container}>
-      <StatusBar style="auto" />
+      <StatusBar style="dark" />
       
       <Animated.View 
         entering={FadeIn.duration(1000)}

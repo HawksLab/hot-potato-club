@@ -214,7 +214,7 @@ export default function Gameplay() {
 
   return (
     <View style={styles.container}>
-      <StatusBar style="auto" />
+      <StatusBar style="dark" />
       
       {showCountdown ? (
         <View style={[styles.countdownOverlay, { paddingTop: insets.top }]}>

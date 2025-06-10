@@ -101,7 +101,7 @@ Sent from Hot Potato Club Mobile App`;
       style={styles.container}
       behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
     >
-      <StatusBar style="auto" />
+      <StatusBar style="dark" />
 
       <View style={styles.header}>
         <TouchableOpacity

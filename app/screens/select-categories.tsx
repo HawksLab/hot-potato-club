@@ -40,7 +40,7 @@ export default function SelectCategories() {
 
   return (
     <View style={styles.container}>
-      <StatusBar style="auto" />
+      <StatusBar style="dark" />
       
       <TouchableOpacity
         style={styles.backButton}

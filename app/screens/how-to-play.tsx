@@ -4,18 +4,18 @@ import { router } from 'expo-router';
 import { StatusBar } from 'expo-status-bar';
 import React from 'react';
 import {
- Image,
- ScrollView,
- StyleSheet,
- Text,
- TouchableOpacity,
- View
+  Image,
+  ScrollView,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  View
 } from 'react-native';
 
 export default function HowToPlay() {
   return (
     <View style={styles.container}>
-      <StatusBar style="auto" />
+      <StatusBar style="dark" />
       
       <TouchableOpacity
         style={styles.backButton}

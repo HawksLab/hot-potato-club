@@ -2,6 +2,7 @@ import { GameProvider } from '@/_context/GameContext';
 import * as Font from 'expo-font';
 import { Stack } from 'expo-router';
 import * as SplashScreen from 'expo-splash-screen';
+import { StatusBar } from 'expo-status-bar';
 import { useCallback, useEffect, useState } from 'react';
 import { View } from 'react-native';
 
@@ -48,6 +49,7 @@ export default function RootLayout() {
   // If we're ready to show the app, render it with our custom splash screen animation
   return (
     <GameProvider>
+      <StatusBar style="dark" />
       <View 
         style={{ flex: 1 }}
         onLayout={onLayoutRootView}

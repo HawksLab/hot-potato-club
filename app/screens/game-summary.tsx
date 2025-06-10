@@ -82,7 +82,7 @@ export default function GameSummary() {
 
   return (
     <View style={styles.container}>
-      <StatusBar style="auto" />
+      <StatusBar style="dark" />
 
       <Text style={styles.title}>Game Over!</Text>
       <Text style={styles.subtitle}>Final Results</Text>

@@ -36,7 +36,7 @@ export default function GameSettings() {
 
   return (
     <View style={styles.container}>
-      <StatusBar style="auto" />
+      <StatusBar style="dark" />
       
       <TouchableOpacity
         style={styles.backButton}
